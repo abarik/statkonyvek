@@ -3,8 +3,7 @@ tab:nice-tab
 eq:binom
 thm:tri
 bevezetés
-hello-bookdown
-a-section
+ingyenes-könyvek
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
