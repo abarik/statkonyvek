@@ -102,7 +102,8 @@
 </h4>
 <p>Cushny, A. R and Peebles, A. R. (1905). The action of optical isomers. The Journal of Physiology, 32: 501-510.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sleep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"adat/jaspdata/sleep.csv"</span>, 
+<code class="sourceCode R"><span class="co"># beolvasás</span>
+<span class="va">sleep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"adat/jaspdata/sleep.csv"</span>, 
                     sep <span class="op">=</span> <span class="st">","</span>, 
                     dec <span class="op">=</span> <span class="st">"."</span>,
                     header <span class="op">=</span> <span class="cn">T</span>, 
@@ -110,12 +111,45 @@
                     comment.char <span class="op">=</span> <span class="st">""</span>, 
                     fileEncoding <span class="op">=</span> <span class="st">"UTF-8"</span>
                     <span class="op">)</span>
-
+<span class="co"># típuskonverzió</span>
+<span class="va">sleep</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">group</span><span class="op">)</span>
+<span class="va">sleep</span><span class="op">$</span><span class="va">ID</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">$</span><span class="va">ID</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">sleep</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    20 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ extra: num  0.7 -1.6 -0.2 -1.2 -0.1 3.4 3.7 0.8 0 2 ...</span>
-<span class="co">#&gt;  $ group: int  1 1 1 1 1 1 1 1 1 1 ...</span>
-<span class="co">#&gt;  $ ID   : int  1 2 3 4 5 6 7 8 9 10 ...</span></code></pre></div>
+<span class="co">#&gt;  $ group: Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="co">#&gt;  $ ID   : Factor w/ 10 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span>
+
+<span class="co"># leíró statisztikai mutatók</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://andrisignorell.github.io/DescTools/">DescTools</a></span><span class="op">)</span>
+<span class="fu"><a href="https://andrisignorell.github.io/DescTools/reference/Desc.html">Desc</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">extra</span><span class="op">~</span><span class="va">group</span>, data <span class="op">=</span> <span class="va">sleep</span>, plotit <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="co">#&gt; ---------------------------------------------------------- </span>
+<span class="co">#&gt; extra ~ group (sleep)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Summary: </span>
+<span class="co">#&gt; n pairs: 20, valid: 20 (100.0%), missings: 0 (0.0%), groups: 2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;                         </span>
+<span class="co">#&gt;               1        2</span>
+<span class="co">#&gt; mean      0.750    2.330</span>
+<span class="co">#&gt; median    0.350    1.750</span>
+<span class="co">#&gt; sd        1.789    2.002</span>
+<span class="co">#&gt; IQR       1.875    3.275</span>
+<span class="co">#&gt; n            10       10</span>
+<span class="co">#&gt; np      50.000%  50.000%</span>
+<span class="co">#&gt; NAs           0        0</span>
+<span class="co">#&gt; 0s            1        0</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Kruskal-Wallis rank sum test:</span>
+<span class="co">#&gt;   Kruskal-Wallis chi-squared = 3.4378, df = 1, p-value = 0.06372</span>
+
+<span class="co"># ábra</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sleep</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">group</span>, y<span class="op">=</span><span class="va">extra</span>, fill<span class="op">=</span><span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html">geom_violin</a></span><span class="op">(</span>trim <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">0</span>, width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> </code></pre></div>
+<div class="inline-figure"><img src="01001-jaspdatalibrary_files/figure-html/unnamed-chunk-1-1.png" width="672"></div>
 
 </div>
 </div>
