@@ -1,0 +1,215 @@
+# Adatbázis példák a könyvekből
+
+## ONLINESTAT
+
+::: {.rmdnote}
+
+**Hivatkozás a könyvre:**
+
+Online Statistics Education: A Multimedia Course of Study (http://onlinestatbook.com/). Project Leader: David M. Lane, Rice University.
+  
+[A könyv elérése](http://onlinestatbook.com/)
+
+:::
+
+### A `leniency` adatbázis
+
+#### Leírás {-}
+
+A mosoly növeli az engedékenységet? A különböző típusú mosolyok eltérően hatékonyak? Mosolyogjunk ha bajban vagyunk?
+
+Bizonyítékok vannak arra, hogy a mosolygás enyhítheti az esetleges jogsértések megítélését. Ez a "mosoly-engedékenység" elnevezésű jelenség volt Marianne LaFrance és Marvin Hecht 1995-ös tanulmányának középpontjában.
+
+A mosoly segít barátokat nyerni és befolyásolni az embereket. A mosolygás hatásaival kapcsolatos kutatások ezt alátámasztották, és kimutatták, hogy a mosolygó embert kellemesebbnek, vonzóbbnak, őszintébbnek, társaságkedvelőbbnek és hozzáértőbbnek ítélik meg, mint a nem mosolygó embert.
+
+A vizsgálatban egy iskolai szabálytalanságot kellett  megítélni a vizsgálati személyeknek, melynek leírásához egy fényképet is csatoltak az elkövetőről. A fényképen szereplő személy mosolya 4 kategória egyikébe esik: hamis mosoly, érzelmes mosoly, kényszerült mosoly, semleges "mosoly". Az utóbbi neutrális arckifejezés kontrollként került a vizsgálatba. Minden vizsgálati személy pontosan egy feltételben szerepelt. Ez korlátozhatja az eredmények általánosíthatóságát.
+
+
+#### Változók {-}
+
+* `smile` (faktor) - a fényképen szereplő személy mosolya. Lehetséges értékei:
+    * `1` - hamis (false smile)
+    * `2` - érzelmes (felt smile)
+    * `3` - kényszerült (miserable smile)
+    * `4` - semleges (neutral control)
+* `leniency` (numerikus) - annak a mértéke, hogy mennyire voltak engedékenyek az ítéletek.	
+
+#### Hivatkozás {-}
+
+* LaFrance, M., & Hecht, M. A. (1995) Why smiles generate leniency. Personality and Social Psychology Bulletin, 21, 207-214.
+* [Smiles and Leniency](https://onlinestatbook.com/2/case_studies/leniency.html)
+* [One-Factor ANOVA (Between Subjects)](https://onlinestatbook.com/2/analysis_of_variance/one-way.html)
+
+#### Kapcsolódó R sorok {-}
+
+
+```{r}
+# Beolvasás
+leniency <- read.csv(file = "adat/onlinestat/leniency.csv",
+                     sep = ",", 
+                     dec = ".",
+                     header = T, 
+                     quote = "",  
+                     comment.char = "", 
+                     fileEncoding = "UTF-8"
+                    )
+# Típuskonverzió
+leniency$smile <- factor(leniency$smile, 
+    levels = c("1", "2", "3", "4"),
+    labels = c("hamis", "érzelmes", "kényszerült", "semleges"))
+
+# Leíró statisztikai mutatók
+library(DescTools)
+Desc(formula = leniency~smile, data = leniency, plotit = F)
+```
+
+```{r results='asis'}
+# Leíró statisztikai mutatók
+library(summarytools)
+st_options("headings", FALSE)
+stby(data = leniency$leniency, INDICES = leniency$smile, 
+    FUN = descr,
+    stats = c("n.valid", "mean", "med", "sd", "iqr"),
+    transpose = FALSE,
+    style="rmarkdown",
+    caption="Leíró statisztika") 
+```
+
+
+
+```{r fig.cap="Dobozdiagram", fig.height=4, fig.width=5, fig.align='center'}
+# Ábra - dobozdiagram
+library(ggplot2)
+ggplot(data = leniency, mapping = aes(x=smile, y=leniency, fill=smile)) + 
+  geom_violin(trim = FALSE) + 
+  geom_boxplot(alpha=0) + 
+  geom_jitter(height = 0, width = 0.1) + 
+  theme(legend.position = "none")
+```
+
+
+```{r}
+# Hipotézisvizsgálat
+leniency_model <- aov(leniency~smile, data = leniency)
+summary(leniency_model)
+TukeyHSD(leniency_model)
+library(DescTools)
+DunnettTest(leniency~smile, data = leniency, 
+            control = "semleges")
+```
+
+## JASPDATA
+
+
+::: {.rmdnote}
+
+**Hivatkozás a könyvre:**
+
+Wagenmakers, E.-J., Kucharský, Š., & the JASP Team. (2020). The JASP Data Library (1st ed.). https://doi.org/10.6084/m9.figshare.9980744  
+
+[A könyv elérése](https://jasp-stats.org/wp-content/uploads/2020/05/The_JASP_Data_Library_1st_Edition.pdf)
+
+:::
+
+### A `sleep` adatbázis
+
+#### Leírás {-}
+
+
+Ez a híres "Sleep" (Alvás) adatmátrix, amelyet  Student és Fisher is használt cikkeiben. A vizsgálatban 10 személy szerepelt, akik mindegyike 2 altatót is kapott két különböző időpontban. Az adatbázisban azokat a plusz órákat rögzítettük, amelyeket az egyes altatóknak köszönhetünk.
+
+#### Változók {-}
+
+* `extra` (numerikus) - Az extra órák száma az adott altató hatására a placebó altatóhoz képest. 
+* `group` (faktor) - Az altató típusa. Lehetséges értéke: `1` és `2`.
+* `ID` (faktor) - A személy azonosítója.
+
+Az adatbázisban a páros minta hosszú formában van eltárolva.
+
+#### Hivatkozás {-}
+
+* Cushny, A. R and Peebles, A. R. (1905). The action of optical isomers. The Journal of Physiology, 32: 501-510.
+* [A könyvben a 21--27. oldalak](https://jasp-stats.org/wp-content/uploads/2020/05/The_JASP_Data_Library_1st_Edition.pdf)
+
+#### Kapcsolódó R sorok {-}
+
+```{r}
+# Beolvasás 
+sleep <- read.table(file = "adat/jaspdata/sleep.csv", 
+                    sep = ",", 
+                    dec = ".",
+                    header = T, 
+                    quote = "",  
+                    comment.char = "", 
+                    fileEncoding = "UTF-8"
+                    )
+# Típuskonverzió
+sleep$group <- factor(sleep$group)
+sleep$ID <- factor(sleep$ID)
+str(sleep)
+
+# Leíró statisztikai mutatók
+library(DescTools)
+Desc(formula = extra~group, data = sleep, plotit = F)
+```
+
+
+```{r}
+# Leíró statisztikai mutatók
+library(psych)
+temp <- describeBy(x = extra~group, data = sleep, mat=T, fast=T, digits = 2)
+knitr::kable(temp, caption = "Leíró statisztikai mutatók")
+
+library(flextable)
+library(magrittr)
+temp %>% flextable() %>% autofit()
+```
+
+
+```{r results='asis'}
+# Leíró statisztikai mutatók
+library(summarytools)
+st_options("headings", FALSE)
+with(sleep, 
+           stby(data = extra, 
+                INDICES = group, 
+                FUN = descr,
+                stats = c("n.valid", "mean", "sd", 
+                          "min", "med", "max"),
+                transpose = FALSE,
+                style="rmarkdown",
+                caption="Leíró statisztika"
+                )) 
+```
+
+
+```{r fig.cap="Dobozdiagram", fig.height=4, fig.width=4, fig.align='center'}
+# Ábra
+library(ggplot2)
+ggplot(data = sleep, mapping = aes(x=group, y=extra, fill=group)) + 
+  geom_violin(trim = FALSE) + 
+  geom_boxplot(alpha=0) + 
+  geom_jitter(height = 0, width = 0.1) + 
+  theme(legend.position = "none") 
+
+```
+
+
+```{r fig.cap="Dobozdiagram", fig.height=4, fig.width=4, fig.align='center'}
+# Ábra
+library(ggplot2)
+ggplot(data = sleep, mapping = aes(x=group, y=extra, fill=group)) + 
+  geom_boxplot() + 
+  geom_line(aes(group=ID), alpha=0.7) +  
+  geom_point() + 
+  theme(legend.position = "none") 
+
+```
+
+
+```{r}
+# Hipotézisvizsgálat
+library(lsr)
+pairedSamplesTTest(formula = extra~group, data = sleep, id = "ID")
+```
+

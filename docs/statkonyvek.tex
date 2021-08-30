@@ -109,6 +109,14 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
+\usepackage{fontspec}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{colortbl}
+\usepackage{hhline}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
 \ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -117,25 +125,8 @@
 
 \title{Statisztika könyvek}
 \author{Abari Kálmán}
-\date{2021-08-29}
+\date{2021-08-30}
 
-\usepackage{amsthm}
-\newtheorem{theorem}{Theorem}[chapter]
-\newtheorem{lemma}{Lemma}[chapter]
-\newtheorem{corollary}{Corollary}[chapter]
-\newtheorem{proposition}{Proposition}[chapter]
-\newtheorem{conjecture}{Conjecture}[chapter]
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[chapter]
-\theoremstyle{definition}
-\newtheorem{example}{Example}[chapter]
-\theoremstyle{definition}
-\newtheorem{exercise}{Exercise}[chapter]
-\theoremstyle{definition}
-\newtheorem{hypothesis}{Hypothesis}[chapter]
-\theoremstyle{remark}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -143,273 +134,522 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{about}{%
-\chapter{About}\label{about}}
+\hypertarget{bevezetuxe9s}{%
+\chapter{Bevezetés}\label{bevezetuxe9s}}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
+Jelen jegyzet célja a statisztika tanulmányok segítése. Számos segítő könyv, jegyzet, tutoriál és blog érhető el akár szabadon is az interneten, de a kereskedelmi forgalomban lévő anyagokhoz is számos ingyenesen hozzáférhető adatbázis vagy egyéb kiegészítés létezik. Ezeket a tartalmakat dolgozzuk fel, és tesszük elérhetővé az érdeklődők számára. Könyvünkben megkülönböztetett figyelmet szentelünk a pszichológia témakörének, de más tudományágak anyagai megjelenhetnek itt.
 
-\hypertarget{usage}{%
-\section{Usage}\label{usage}}
+Jelen kötet egy együttműködés keretében jött létre, így számos szerzője van:
 
-Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ short\ section} or \texttt{\#\#\#\ An\ even\ shorter\ section}.
-
-The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-\hypertarget{render-book}{%
-\section{Render book}\label{render-book}}
-
-You can render the HTML version of this example book without changing anything:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Find the \textbf{Build} pane in the RStudio IDE, and
-\item
-  Click on \textbf{Build Book}, then select your output format, or select ``All formats'' if you'd like to use multiple formats from the same book source files.
-\end{enumerate}
-
-Or build the book from the R console:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
-
-\hypertarget{preview-book}{%
-\section{Preview book}\label{preview-book}}
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{serve\_book}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
-
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
-
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
-
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
-
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
-
-\hypertarget{cross}{%
-\chapter{Cross-references}\label{cross}}
-
-Cross-references make it easier for your readers to find and link to elements in your book.
-
-\hypertarget{chapters-and-sub-chapters}{%
-\section{Chapters and sub-chapters}\label{chapters-and-sub-chapters}}
-
-There are two steps to cross-reference any heading:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
+\begin{itemize}
 \tightlist
 \item
-  Label the heading: \texttt{\#\ Hello\ world\ \{\#nice-label\}}.
+  Abari Kálmán
+\end{itemize}
+
+\hypertarget{ingyenes-kuxf6nyvek}{%
+\chapter{Ingyenes könyvek}\label{ingyenes-kuxf6nyvek}}
+
+\begin{itemize}
+\item
+  ONLINESTAT - \href{http://onlinestatbook.com/}{A könyv elérése}\\
+  Online Statistics Education: A Multimedia Course of Study (\url{http://onlinestatbook.com/}). Project Leader: David M. Lane, Rice University.
+\item
+  JASPDATA - \href{https://jasp-stats.org/wp-content/uploads/2020/05/The_JASP_Data_Library_1st_Edition.pdf}{A könyv elérése}\\
+  Wagenmakers, E.-J., Kucharský, Š., \& the JASP Team. (2020). The JASP Data Library (1st ed.). \url{https://doi.org/10.6084/m9.figshare.9980744}
+\end{itemize}
+
+\hypertarget{adatbuxe1zis-puxe9lduxe1k-a-kuxf6nyvekbux151l}{%
+\chapter{Adatbázis példák a könyvekből}\label{adatbuxe1zis-puxe9lduxe1k-a-kuxf6nyvekbux151l}}
+
+\hypertarget{onlinestat}{%
+\section{ONLINESTAT}\label{onlinestat}}
+
+\textbf{Hivatkozás a könyvre:}
+
+Online Statistics Education: A Multimedia Course of Study (\url{http://onlinestatbook.com/}). Project Leader: David M. Lane, Rice University.
+
+\href{http://onlinestatbook.com/}{A könyv elérése}
+
+\hypertarget{a-leniency-adatbuxe1zis}{%
+\subsection{\texorpdfstring{A \texttt{leniency} adatbázis}{A leniency adatbázis}}\label{a-leniency-adatbuxe1zis}}
+
+\hypertarget{leuxedruxe1s}{%
+\subsubsection*{Leírás}\label{leuxedruxe1s}}
+\addcontentsline{toc}{subsubsection}{Leírás}
+
+A mosoly növeli az engedékenységet? A különböző típusú mosolyok eltérően hatékonyak? Mosolyogjunk ha bajban vagyunk?
+
+Bizonyítékok vannak arra, hogy a mosolygás enyhítheti az esetleges jogsértések megítélését. Ez a ``mosoly-engedékenység'' elnevezésű jelenség volt Marianne LaFrance és Marvin Hecht 1995-ös tanulmányának középpontjában.
+
+A mosoly segít barátokat nyerni és befolyásolni az embereket. A mosolygás hatásaival kapcsolatos kutatások ezt alátámasztották, és kimutatták, hogy a mosolygó embert kellemesebbnek, vonzóbbnak, őszintébbnek, társaságkedvelőbbnek és hozzáértőbbnek ítélik meg, mint a nem mosolygó embert.
+
+A vizsgálatban egy iskolai szabálytalanságot kellett megítélni a vizsgálati személyeknek, melynek leírásához egy fényképet is csatoltak az elkövetőről. A fényképen szereplő személy mosolya 4 kategória egyikébe esik: hamis mosoly, érzelmes mosoly, kényszerült mosoly, semleges ``mosoly''. Az utóbbi neutrális arckifejezés kontrollként került a vizsgálatba. Minden vizsgálati személy pontosan egy feltételben szerepelt. Ez korlátozhatja az eredmények általánosíthatóságát.
+
+\hypertarget{vuxe1ltozuxf3k}{%
+\subsubsection*{Változók}\label{vuxe1ltozuxf3k}}
+\addcontentsline{toc}{subsubsection}{Változók}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{smile} (faktor) - a fényképen szereplő személy mosolya. Lehetséges értékei:
 
   \begin{itemize}
   \tightlist
   \item
-    Leave the label off if you like the automated heading generated based on your heading title: for example, \texttt{\#\ Hello\ world} = \texttt{\#\ Hello\ world\ \{\#hello-world\}}.
+    \texttt{1} - hamis (false smile)
   \item
-    To label an un-numbered heading, use: \texttt{\#\ Hello\ world\ \{-\#nice-label\}} or \texttt{\{\#\ Hello\ world\ .unnumbered\}}.
+    \texttt{2} - érzelmes (felt smile)
+  \item
+    \texttt{3} - kényszerült (miserable smile)
+  \item
+    \texttt{4} - semleges (neutral control)
   \end{itemize}
 \item
-  Next, reference the labeled heading anywhere in the text using \texttt{\textbackslash{}@ref(nice-label)}; for example, please see Chapter \ref{cross}.
+  \texttt{leniency} (numerikus) - annak a mértéke, hogy mennyire voltak engedékenyek az ítéletek.
+\end{itemize}
 
-  \begin{itemize}
-  \tightlist
-  \item
-    If you prefer text as the link instead of a numbered reference use: \protect\hyperlink{cross}{any text you want can go here}.
-  \end{itemize}
-\end{enumerate}
+\hypertarget{hivatkozuxe1s}{%
+\subsubsection*{Hivatkozás}\label{hivatkozuxe1s}}
+\addcontentsline{toc}{subsubsection}{Hivatkozás}
 
-\hypertarget{captioned-figures-and-tables}{%
-\section{Captioned figures and tables}\label{captioned-figures-and-tables}}
+\begin{itemize}
+\tightlist
+\item
+  LaFrance, M., \& Hecht, M. A. (1995) Why smiles generate leniency. Personality and Social Psychology Bulletin, 21, 207-214.
+\item
+  \href{https://onlinestatbook.com/2/case_studies/leniency.html}{Smiles and Leniency}
+\item
+  \href{https://onlinestatbook.com/2/analysis_of_variance/one-way.html}{One-Factor ANOVA (Between Subjects)}
+\end{itemize}
 
-Figures and tables \emph{with captions} can also be cross-referenced from elsewhere in your book using \texttt{\textbackslash{}@ref(fig:chunk-label)} and \texttt{\textbackslash{}@ref(tag:chunk-label)}, respectively.
-
-See Figure \ref{fig:nice-fig}.
+\hypertarget{kapcsoluxf3duxf3-r-sorok}{%
+\subsubsection*{Kapcsolódó R sorok}\label{kapcsoluxf3duxf3-r-sorok}}
+\addcontentsline{toc}{subsubsection}{Kapcsolódó R sorok}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{par}\NormalTok{(}\AttributeTok{mar =} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\FunctionTok{plot}\NormalTok{(pressure, }\AttributeTok{type =} \StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{, }\AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\CommentTok{\# Beolvasás}
+\NormalTok{leniency }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"adat/onlinestat/leniency.csv"}\NormalTok{,}
+                     \AttributeTok{sep =} \StringTok{","}\NormalTok{, }
+                     \AttributeTok{dec =} \StringTok{"."}\NormalTok{,}
+                     \AttributeTok{header =}\NormalTok{ T, }
+                     \AttributeTok{quote =} \StringTok{""}\NormalTok{,  }
+                     \AttributeTok{comment.char =} \StringTok{""}\NormalTok{, }
+                     \AttributeTok{fileEncoding =} \StringTok{"UTF{-}8"}
+\NormalTok{                    )}
+\CommentTok{\# Típuskonverzió}
+\NormalTok{leniency}\SpecialCharTok{$}\NormalTok{smile }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(leniency}\SpecialCharTok{$}\NormalTok{smile, }
+    \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"1"}\NormalTok{, }\StringTok{"2"}\NormalTok{, }\StringTok{"3"}\NormalTok{, }\StringTok{"4"}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"hamis"}\NormalTok{, }\StringTok{"érzelmes"}\NormalTok{, }\StringTok{"kényszerült"}\NormalTok{, }\StringTok{"semleges"}\NormalTok{))}
+
+\CommentTok{\# Leíró statisztikai mutatók}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\FunctionTok{Desc}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ leniency}\SpecialCharTok{\textasciitilde{}}\NormalTok{smile, }\AttributeTok{data =}\NormalTok{ leniency, }\AttributeTok{plotit =}\NormalTok{ F)}
+\CommentTok{\#\textgreater{} {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\#\textgreater{} leniency \textasciitilde{} smile (leniency)}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Summary: }
+\CommentTok{\#\textgreater{} n pairs: 136, valid: 136 (100.0\%), missings: 0 (0.0\%), groups: 4}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{}                                                           }
+\CommentTok{\#\textgreater{}               hamis     érzelmes  kényszerült     semleges}
+\CommentTok{\#\textgreater{} mean          5.368        4.912        4.912        4.118}
+\CommentTok{\#\textgreater{} median        5.500        4.750        4.750        4.000}
+\CommentTok{\#\textgreater{} sd            1.827        1.681        1.454        1.523}
+\CommentTok{\#\textgreater{} IQR           2.875        2.375        1.500        1.875}
+\CommentTok{\#\textgreater{} n                34           34           34           34}
+\CommentTok{\#\textgreater{} np          25.000\%      25.000\%      25.000\%      25.000\%}
+\CommentTok{\#\textgreater{} NAs               0            0            0            0}
+\CommentTok{\#\textgreater{} 0s                0            0            0            0}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Kruskal{-}Wallis rank sum test:}
+\CommentTok{\#\textgreater{}   Kruskal{-}Wallis chi{-}squared = 9.1747, df = 3, p{-}value = 0.02706}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Leíró statisztikai mutatók}
+\FunctionTok{library}\NormalTok{(summarytools)}
+\FunctionTok{st\_options}\NormalTok{(}\StringTok{"headings"}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{stby}\NormalTok{(}\AttributeTok{data =}\NormalTok{ leniency}\SpecialCharTok{$}\NormalTok{leniency, }\AttributeTok{INDICES =}\NormalTok{ leniency}\SpecialCharTok{$}\NormalTok{smile, }
+    \AttributeTok{FUN =}\NormalTok{ descr,}
+    \AttributeTok{stats =} \FunctionTok{c}\NormalTok{(}\StringTok{"n.valid"}\NormalTok{, }\StringTok{"mean"}\NormalTok{, }\StringTok{"med"}\NormalTok{, }\StringTok{"sd"}\NormalTok{, }\StringTok{"iqr"}\NormalTok{),}
+    \AttributeTok{transpose =} \ConstantTok{FALSE}\NormalTok{,}
+    \AttributeTok{style=}\StringTok{"rmarkdown"}\NormalTok{,}
+    \AttributeTok{caption=}\StringTok{"Leíró statisztika"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrrrr@{}}
+\caption{Leíró statisztika}\tabularnewline
+\toprule
+& hamis & érzelmes & kényszerült & semleges \\
+\midrule
+\endfirsthead
+\toprule
+& hamis & érzelmes & kényszerült & semleges \\
+\midrule
+\endhead
+N.Valid & 34.00 & 34.00 & 34.00 & 34.00 \\
+Mean & 5.37 & 4.91 & 4.91 & 4.12 \\
+Median & 5.50 & 4.75 & 4.75 & 4.00 \\
+Std.Dev & 1.83 & 1.68 & 1.45 & 1.52 \\
+IQR & 2.88 & 2.38 & 1.50 & 1.88 \\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Ábra {-} dobozdiagram}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ leniency, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{smile, }\AttributeTok{y=}\NormalTok{leniency, }\AttributeTok{fill=}\NormalTok{smile)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{alpha=}\DecValTok{0}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{height =} \DecValTok{0}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth]{02-cross-refs_files/figure-latex/nice-fig-1} 
+{\centering \includegraphics{02-peldak_files/figure-latex/unnamed-chunk-3-1} 
 
 }
 
-\caption{Here is a nice figure!}\label{fig:nice-fig}
+\caption{Dobozdiagram}\label{fig:unnamed-chunk-3}
 \end{figure}
-
-Don't miss Table \ref{tab:nice-tab}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}
-  \FunctionTok{head}\NormalTok{(pressure, }\DecValTok{10}\NormalTok{), }\AttributeTok{caption =} \StringTok{\textquotesingle{}Here is a nice table!\textquotesingle{}}\NormalTok{,}
-  \AttributeTok{booktabs =} \ConstantTok{TRUE}
-\NormalTok{)}
+\CommentTok{\# Hipotézisvizsgálat}
+\NormalTok{leniency\_model }\OtherTok{\textless{}{-}} \FunctionTok{aov}\NormalTok{(leniency}\SpecialCharTok{\textasciitilde{}}\NormalTok{smile, }\AttributeTok{data =}\NormalTok{ leniency)}
+\FunctionTok{summary}\NormalTok{(leniency\_model)}
+\CommentTok{\#\textgreater{}              Df Sum Sq Mean Sq F value Pr(\textgreater{}F)  }
+\CommentTok{\#\textgreater{} smile         3   27.5   9.178   3.465 0.0182 *}
+\CommentTok{\#\textgreater{} Residuals   132  349.7   2.649                 }
+\CommentTok{\#\textgreater{} {-}{-}{-}}
+\CommentTok{\#\textgreater{} Signif. codes:  }
+\CommentTok{\#\textgreater{} 0 \textquotesingle{}***\textquotesingle{} 0.001 \textquotesingle{}**\textquotesingle{} 0.01 \textquotesingle{}*\textquotesingle{} 0.05 \textquotesingle{}.\textquotesingle{} 0.1 \textquotesingle{} \textquotesingle{} 1}
+\FunctionTok{TukeyHSD}\NormalTok{(leniency\_model)}
+\CommentTok{\#\textgreater{}   Tukey multiple comparisons of means}
+\CommentTok{\#\textgreater{}     95\% family{-}wise confidence level}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Fit: aov(formula = leniency \textasciitilde{} smile, data = leniency)}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $smile}
+\CommentTok{\#\textgreater{}                            diff       lwr        upr}
+\CommentTok{\#\textgreater{} érzelmes{-}hamis       {-}0.4558824 {-}1.483012  0.5712478}
+\CommentTok{\#\textgreater{} kényszerült{-}hamis    {-}0.4558824 {-}1.483012  0.5712478}
+\CommentTok{\#\textgreater{} semleges{-}hamis       {-}1.2500000 {-}2.277130 {-}0.2228699}
+\CommentTok{\#\textgreater{} kényszerült{-}érzelmes  0.0000000 {-}1.027130  1.0271301}
+\CommentTok{\#\textgreater{} semleges{-}érzelmes    {-}0.7941176 {-}1.821248  0.2330125}
+\CommentTok{\#\textgreater{} semleges{-}kényszerült {-}0.7941176 {-}1.821248  0.2330125}
+\CommentTok{\#\textgreater{}                          p adj}
+\CommentTok{\#\textgreater{} érzelmes{-}hamis       0.6562329}
+\CommentTok{\#\textgreater{} kényszerült{-}hamis    0.6562329}
+\CommentTok{\#\textgreater{} semleges{-}hamis       0.0102192}
+\CommentTok{\#\textgreater{} kényszerült{-}érzelmes 1.0000000}
+\CommentTok{\#\textgreater{} semleges{-}érzelmes    0.1888804}
+\CommentTok{\#\textgreater{} semleges{-}kényszerült 0.1888804}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\FunctionTok{DunnettTest}\NormalTok{(leniency}\SpecialCharTok{\textasciitilde{}}\NormalTok{smile, }\AttributeTok{data =}\NormalTok{ leniency, }
+            \AttributeTok{control =} \StringTok{"semleges"}\NormalTok{)}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{}   Dunnett\textquotesingle{}s test for comparing several treatments with a control :  }
+\CommentTok{\#\textgreater{}     95\% family{-}wise confidence level}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} $semleges}
+\CommentTok{\#\textgreater{}                           diff     lwr.ci   upr.ci   pval}
+\CommentTok{\#\textgreater{} hamis{-}semleges       1.2500000  0.3119186 2.188081 0.0055}
+\CommentTok{\#\textgreater{} érzelmes{-}semleges    0.7941176 {-}0.1439637 1.732199 0.1162}
+\CommentTok{\#\textgreater{} kényszerült{-}semleges 0.7941176 {-}0.1439637 1.732199 0.1164}
+\CommentTok{\#\textgreater{}                         }
+\CommentTok{\#\textgreater{} hamis{-}semleges       ** }
+\CommentTok{\#\textgreater{} érzelmes{-}semleges       }
+\CommentTok{\#\textgreater{} kényszerült{-}semleges    }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} {-}{-}{-}}
+\CommentTok{\#\textgreater{} Signif. codes:  0 \textquotesingle{}***\textquotesingle{} 0.001 \textquotesingle{}**\textquotesingle{} 0.01 \textquotesingle{}*\textquotesingle{} 0.05 \textquotesingle{}.\textquotesingle{} 0.1 \textquotesingle{} \textquotesingle{} 1}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{jaspdata}{%
+\section{JASPDATA}\label{jaspdata}}
+
+\textbf{Hivatkozás a könyvre:}
+
+Wagenmakers, E.-J., Kucharský, Š., \& the JASP Team. (2020). The JASP Data Library (1st ed.). \url{https://doi.org/10.6084/m9.figshare.9980744}
+
+\href{https://jasp-stats.org/wp-content/uploads/2020/05/The_JASP_Data_Library_1st_Edition.pdf}{A könyv elérése}
+
+\hypertarget{a-sleep-adatbuxe1zis}{%
+\subsection{\texorpdfstring{A \texttt{sleep} adatbázis}{A sleep adatbázis}}\label{a-sleep-adatbuxe1zis}}
+
+\hypertarget{leuxedruxe1s-1}{%
+\subsubsection*{Leírás}\label{leuxedruxe1s-1}}
+\addcontentsline{toc}{subsubsection}{Leírás}
+
+Ez a híres ``Sleep'' (Alvás) adatmátrix, amelyet Student és Fisher is használt cikkeiben. A vizsgálatban 10 személy szerepelt, akik mindegyike 2 altatót is kapott két különböző időpontban. Az adatbázisban azokat a plusz órákat rögzítettük, amelyeket az egyes altatóknak köszönhetünk.
+
+\hypertarget{vuxe1ltozuxf3k-1}{%
+\subsubsection*{Változók}\label{vuxe1ltozuxf3k-1}}
+\addcontentsline{toc}{subsubsection}{Változók}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{extra} (numerikus) - Az extra órák száma az adott altató hatására a placebó altatóhoz képest.
+\item
+  \texttt{group} (faktor) - Az altató típusa. Lehetséges értéke: \texttt{1} és \texttt{2}.
+\item
+  \texttt{ID} (faktor) - A személy azonosítója.
+\end{itemize}
+
+Az adatbázisban a páros minta hosszú formában van eltárolva.
+
+\hypertarget{hivatkozuxe1s-1}{%
+\subsubsection*{Hivatkozás}\label{hivatkozuxe1s-1}}
+\addcontentsline{toc}{subsubsection}{Hivatkozás}
+
+\begin{itemize}
+\tightlist
+\item
+  Cushny, A. R and Peebles, A. R. (1905). The action of optical isomers. The Journal of Physiology, 32: 501-510.
+\item
+  \href{https://jasp-stats.org/wp-content/uploads/2020/05/The_JASP_Data_Library_1st_Edition.pdf}{A könyvben a 21--27. oldalak}
+\end{itemize}
+
+\hypertarget{kapcsoluxf3duxf3-r-sorok-1}{%
+\subsubsection*{Kapcsolódó R sorok}\label{kapcsoluxf3duxf3-r-sorok-1}}
+\addcontentsline{toc}{subsubsection}{Kapcsolódó R sorok}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Beolvasás }
+\NormalTok{sleep }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\AttributeTok{file =} \StringTok{"adat/jaspdata/sleep.csv"}\NormalTok{, }
+                    \AttributeTok{sep =} \StringTok{","}\NormalTok{, }
+                    \AttributeTok{dec =} \StringTok{"."}\NormalTok{,}
+                    \AttributeTok{header =}\NormalTok{ T, }
+                    \AttributeTok{quote =} \StringTok{""}\NormalTok{,  }
+                    \AttributeTok{comment.char =} \StringTok{""}\NormalTok{, }
+                    \AttributeTok{fileEncoding =} \StringTok{"UTF{-}8"}
+\NormalTok{                    )}
+\CommentTok{\# Típuskonverzió}
+\NormalTok{sleep}\SpecialCharTok{$}\NormalTok{group }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{group)}
+\NormalTok{sleep}\SpecialCharTok{$}\NormalTok{ID }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(sleep}\SpecialCharTok{$}\NormalTok{ID)}
+\FunctionTok{str}\NormalTok{(sleep)}
+\CommentTok{\#\textgreater{} \textquotesingle{}data.frame\textquotesingle{}:    20 obs. of  3 variables:}
+\CommentTok{\#\textgreater{}  $ extra: num  0.7 {-}1.6 {-}0.2 {-}1.2 {-}0.1 3.4 3.7 0.8 0 2 ...}
+\CommentTok{\#\textgreater{}  $ group: Factor w/ 2 levels "1","2": 1 1 1 1 1 1 1 1 1 1 ...}
+\CommentTok{\#\textgreater{}  $ ID   : Factor w/ 10 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...}
+
+\CommentTok{\# Leíró statisztikai mutatók}
+\FunctionTok{library}\NormalTok{(DescTools)}
+\FunctionTok{Desc}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ extra}\SpecialCharTok{\textasciitilde{}}\NormalTok{group, }\AttributeTok{data =}\NormalTok{ sleep, }\AttributeTok{plotit =}\NormalTok{ F)}
+\CommentTok{\#\textgreater{} {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\#\textgreater{} extra \textasciitilde{} group (sleep)}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Summary: }
+\CommentTok{\#\textgreater{} n pairs: 20, valid: 20 (100.0\%), missings: 0 (0.0\%), groups: 2}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{}                         }
+\CommentTok{\#\textgreater{}               1        2}
+\CommentTok{\#\textgreater{} mean      0.750    2.330}
+\CommentTok{\#\textgreater{} median    0.350    1.750}
+\CommentTok{\#\textgreater{} sd        1.789    2.002}
+\CommentTok{\#\textgreater{} IQR       1.875    3.275}
+\CommentTok{\#\textgreater{} n            10       10}
+\CommentTok{\#\textgreater{} np      50.000\%  50.000\%}
+\CommentTok{\#\textgreater{} NAs           0        0}
+\CommentTok{\#\textgreater{} 0s            1        0}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Kruskal{-}Wallis rank sum test:}
+\CommentTok{\#\textgreater{}   Kruskal{-}Wallis chi{-}squared = 3.4378, df = 1, p{-}value = 0.06372}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Leíró statisztikai mutatók}
+\FunctionTok{library}\NormalTok{(psych)}
+\NormalTok{temp }\OtherTok{\textless{}{-}} \FunctionTok{describeBy}\NormalTok{(}\AttributeTok{x =}\NormalTok{ extra}\SpecialCharTok{\textasciitilde{}}\NormalTok{group, }\AttributeTok{data =}\NormalTok{ sleep, }\AttributeTok{mat=}\NormalTok{T, }\AttributeTok{fast=}\NormalTok{T, }\AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(temp, }\AttributeTok{caption =} \StringTok{"Leíró statisztikai mutatók"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{table}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
+\caption{\label{tab:unnamed-chunk-6}Leíró statisztikai mutatók}
 \centering
-\begin{tabular}[t]{rr}
-\toprule
-temperature & pressure\\
-\midrule
-0 & 0.0002\\
-20 & 0.0012\\
-40 & 0.0060\\
-60 & 0.0300\\
-80 & 0.0900\\
-\addlinespace
-100 & 0.2700\\
-120 & 0.7500\\
-140 & 1.8500\\
-160 & 4.2000\\
-180 & 8.8000\\
-\bottomrule
+\begin{tabular}[t]{l|l|l|r|r|r|r|r|r|r|r}
+\hline
+  & item & group1 & vars & n & mean & sd & min & max & range & se\\
+\hline
+X11 & 1 & 1 & 1 & 10 & 0.75 & 1.79 & -1.6 & 3.7 & 5.3 & 0.57\\
+\hline
+X12 & 2 & 2 & 1 & 10 & 2.33 & 2.00 & -0.1 & 5.5 & 5.6 & 0.63\\
+\hline
 \end{tabular}
 \end{table}
 
-\hypertarget{parts}{%
-\chapter{Parts}\label{parts}}
-
-You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.
-
-Add a numbered part: \texttt{\#\ (PART)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
-
-Add an unnumbered part: \texttt{\#\ (PART\textbackslash{}*)\ Act\ one\ \{-\}} (followed by \texttt{\#\ A\ chapter})
-
-Add an appendix as a special kind of un-numbered part: \texttt{\#\ (APPENDIX)\ Other\ stuff\ \{-\}} (followed by \texttt{\#\ A\ chapter}). Chapters in an appendix are prepended with letters instead of numbers.
-
-\hypertarget{footnotes-and-citations}{%
-\chapter{Footnotes and citations}\label{footnotes-and-citations}}
-
-\hypertarget{footnotes}{%
-\section{Footnotes}\label{footnotes}}
-
-Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
-
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
-
-Reference items in your bibliography file(s) using \texttt{@key}.
-
-For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
-Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
-
-The \texttt{bs4\_book} theme makes footnotes appear inline when you click on them. In this example book, we added \texttt{csl:\ chicago-fullnote-bibliography.csl} to the \texttt{index.Rmd} YAML, and include the \texttt{.csl} file. To download a new style, we recommend: \url{https://www.zotero.org/styles/}
-
-The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
-
-\hypertarget{blocks}{%
-\chapter{Blocks}\label{blocks}}
-
-\hypertarget{equations}{%
-\section{Equations}\label{equations}}
-
-Here is an equation.
-
-\begin{equation} 
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \label{eq:binom}
-\end{equation}
-
-You may refer to using \texttt{\textbackslash{}@ref(eq:binom)}, like see Equation \eqref{eq:binom}.
-
-\hypertarget{theorems-and-proofs}{%
-\section{Theorems and proofs}\label{theorems-and-proofs}}
-
-Labeled theorems can be referenced in text using \texttt{\textbackslash{}@ref(thm:tri)}, for example, check out this smart theorem \ref{thm:tri}.
-
-\begin{theorem}
-\protect\hypertarget{thm:tri}{}\label{thm:tri}For a right triangle, if \(c\) denotes the \emph{length} of the hypotenuse
-and \(a\) and \(b\) denote the lengths of the \textbf{other} two sides, we have
-\[a^2 + b^2 = c^2\]
-\end{theorem}
-
-Read more here \url{https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html}.
-
-\hypertarget{callout-blocks}{%
-\section{Callout blocks}\label{callout-blocks}}
-
-The \texttt{bs4\_book} theme also includes special callout blocks, like this \texttt{.rmdnote}.
-
-You can use \textbf{markdown} inside a block.
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(beaver1, }\AttributeTok{n =} \DecValTok{5}\NormalTok{)}
-\CommentTok{\#\textgreater{}   day time  temp activ}
-\CommentTok{\#\textgreater{} 1 346  840 36.33     0}
-\CommentTok{\#\textgreater{} 2 346  850 36.34     0}
-\CommentTok{\#\textgreater{} 3 346  900 36.35     0}
-\CommentTok{\#\textgreater{} 4 346  910 36.42     0}
-\CommentTok{\#\textgreater{} 5 346  920 36.55     0}
+
+\FunctionTok{library}\NormalTok{(flextable)}
+\FunctionTok{library}\NormalTok{(magrittr)}
+\NormalTok{temp }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{flextable}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{autofit}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-It is up to the user to define the appearance of these blocks for LaTeX output.
+\providecommand{\docline}[3]{\noalign{\global\setlength{\arrayrulewidth}{#1}}\arrayrulecolor[HTML]{#2}\cline{#3}}
 
-You may also use: \texttt{.rmdcaution}, \texttt{.rmdimportant}, \texttt{.rmdtip}, or \texttt{.rmdwarning} as the block name.
+\setlength{\tabcolsep}{2pt}
 
-The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: \url{https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html}
+\renewcommand*{\arraystretch}{1.5}
 
-\hypertarget{sharing-your-book}{%
-\chapter{Sharing your book}\label{sharing-your-book}}
+\begin{longtable}[c]{|p{0.57in}|p{0.76in}|p{0.57in}|p{0.46in}|p{0.67in}|p{0.58in}|p{0.55in}|p{0.57in}|p{0.68in}|p{0.58in}}
 
-\hypertarget{publishing}{%
-\section{Publishing}\label{publishing}}
 
-HTML books can be published online, see: \url{https://bookdown.org/yihui/bookdown/publishing.html}
 
-\hypertarget{pages}{%
-\section{404 pages}\label{pages}}
+\hhline{>{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}-}
 
-By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a \texttt{\_404.Rmd} or \texttt{\_404.md} file to your project root and use code and/or Markdown syntax.
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}item}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.76in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}group1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}vars}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.46in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}n}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.67in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}mean}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}sd}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.55in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}min}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}max}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.68in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}range}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}se}}} \\
 
-\hypertarget{metadata-for-sharing}{%
-\section{Metadata for sharing}\label{metadata-for-sharing}}
+\noalign{\global\setlength{\arrayrulewidth}{2pt}}\arrayrulecolor[HTML]{666666}\cline{1-10}
 
-Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the \texttt{index.Rmd} YAML. To setup, set the \texttt{url} for your book and the path to your \texttt{cover-image} file. Your book's \texttt{title} and \texttt{description} are also used.
+\endfirsthead
 
-This \texttt{bs4\_book} provides enhanced metadata for social sharing, so that each chapter shared will have a unique description, auto-generated based on the content.
+\hhline{>{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}->{\arrayrulecolor[HTML]{666666}\global\arrayrulewidth=2pt}-}
 
-Specify your book's source repository on GitHub as the \texttt{repo} in the \texttt{\_output.yml} file, which allows users to view each chapter's source file or suggest an edit. Read more about the features of this output format here:
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}item}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.76in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}group1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}vars}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.46in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}n}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.67in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}mean}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}sd}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.55in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}min}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}max}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.68in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}range}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}se}}} \\
 
-\url{https://pkgs.rstudio.com/bookdown/reference/bs4_book.html}
+\noalign{\global\setlength{\arrayrulewidth}{2pt}}\arrayrulecolor[HTML]{666666}\cline{1-10}\endhead
 
-Or use:
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.76in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.46in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}10}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.67in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}0.75}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}1.79}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.55in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}-1.6}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}3.7}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.68in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}5.3}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}0.57}}} \\
+
+
+
+
+
+\multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}2}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedright}p{\dimexpr 0.76in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}2}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.46in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}10}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.67in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}2.33}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}2.00}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.55in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}-0.1}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.57in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}5.5}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.68in+0\tabcolsep+0\arrayrulewidth}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}5.6}}} & \multicolumn{1}{!{\color[HTML]{000000}\vrule width 0pt}>{\raggedleft}p{\dimexpr 0.58in+0\tabcolsep+0\arrayrulewidth}!{\color[HTML]{000000}\vrule width 0pt}}{\fontsize{11}{11}\selectfont{\textcolor[HTML]{000000}{\global\setmainfont{Arial}0.63}}} \\
+
+\noalign{\global\setlength{\arrayrulewidth}{2pt}}\arrayrulecolor[HTML]{666666}\cline{1-10}
+
+\end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{?bookdown}\SpecialCharTok{::}\NormalTok{bs4\_book}
+\CommentTok{\# Leíró statisztikai mutatók}
+\FunctionTok{library}\NormalTok{(summarytools)}
+\FunctionTok{st\_options}\NormalTok{(}\StringTok{"headings"}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{with}\NormalTok{(sleep, }
+           \FunctionTok{stby}\NormalTok{(}\AttributeTok{data =}\NormalTok{ extra, }
+                \AttributeTok{INDICES =}\NormalTok{ group, }
+                \AttributeTok{FUN =}\NormalTok{ descr,}
+                \AttributeTok{stats =} \FunctionTok{c}\NormalTok{(}\StringTok{"n.valid"}\NormalTok{, }\StringTok{"mean"}\NormalTok{, }\StringTok{"sd"}\NormalTok{, }
+                          \StringTok{"min"}\NormalTok{, }\StringTok{"med"}\NormalTok{, }\StringTok{"max"}\NormalTok{),}
+                \AttributeTok{transpose =} \ConstantTok{FALSE}\NormalTok{,}
+                \AttributeTok{style=}\StringTok{"rmarkdown"}\NormalTok{,}
+                \AttributeTok{caption=}\StringTok{"Leíró statisztika"}
+\NormalTok{                )) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}lrr@{}}
+\caption{Leíró statisztika}\tabularnewline
+\toprule
+& 1 & 2 \\
+\midrule
+\endfirsthead
+\toprule
+& 1 & 2 \\
+\midrule
+\endhead
+N.Valid & 10.00 & 10.00 \\
+Mean & 0.75 & 2.33 \\
+Std.Dev & 1.79 & 2.00 \\
+Min & -1.60 & -0.10 \\
+Median & 0.35 & 1.75 \\
+Max & 3.70 & 5.50 \\
+\bottomrule
+\end{longtable}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Ábra}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sleep, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{group, }\AttributeTok{y=}\NormalTok{extra, }\AttributeTok{fill=}\NormalTok{group)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{trim =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{alpha=}\DecValTok{0}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{height =} \DecValTok{0}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.1}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{02-peldak_files/figure-latex/unnamed-chunk-8-1} 
+
+}
+
+\caption{Dobozdiagram}\label{fig:unnamed-chunk-8}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Ábra}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ sleep, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{group, }\AttributeTok{y=}\NormalTok{extra, }\AttributeTok{fill=}\NormalTok{group)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{group=}\NormalTok{ID), }\AttributeTok{alpha=}\FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}  
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{02-peldak_files/figure-latex/unnamed-chunk-9-1} 
+
+}
+
+\caption{Dobozdiagram}\label{fig:unnamed-chunk-9}
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Hipotézisvizsgálat}
+\FunctionTok{library}\NormalTok{(lsr)}
+\FunctionTok{pairedSamplesTTest}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ extra}\SpecialCharTok{\textasciitilde{}}\NormalTok{group, }\AttributeTok{data =}\NormalTok{ sleep, }\AttributeTok{id =} \StringTok{"ID"}\NormalTok{)}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{}    Paired samples t{-}test }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Outcome variable:   extra }
+\CommentTok{\#\textgreater{} Grouping variable:  group }
+\CommentTok{\#\textgreater{} ID variable:        ID }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Descriptive statistics: }
+\CommentTok{\#\textgreater{}                 1     2 difference}
+\CommentTok{\#\textgreater{}    mean     0.750 2.330     {-}1.580}
+\CommentTok{\#\textgreater{}    std dev. 1.789 2.002      1.230}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Hypotheses: }
+\CommentTok{\#\textgreater{}    null:        population means equal for both measurements}
+\CommentTok{\#\textgreater{}    alternative: different population means for each measurement}
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Test results: }
+\CommentTok{\#\textgreater{}    t{-}statistic:  {-}4.062 }
+\CommentTok{\#\textgreater{}    degrees of freedom:  9 }
+\CommentTok{\#\textgreater{}    p{-}value:  0.003 }
+\CommentTok{\#\textgreater{} }
+\CommentTok{\#\textgreater{} Other information: }
+\CommentTok{\#\textgreater{}    two{-}sided 95\% confidence interval:  [{-}2.46, {-}0.7] }
+\CommentTok{\#\textgreater{}    estimated effect size (Cohen\textquotesingle{}s d):  1.285}
 \end{Highlighting}
 \end{Shaded}
 

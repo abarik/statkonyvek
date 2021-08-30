@@ -1,4 +1,7 @@
 bookdown::bs4_book:
+  includes:
+    in_header: local_js.html
+  split_by: "section"
   css: bs4_style.css
   theme:
     primary: "#096B72"

@@ -4,5 +4,11 @@ before_chapter_script: _common.R
 delete_merged_file: true
 output_dir: "docs"
 language:
+  label:
+#    fig: !expr function(i) paste(i, ". ábra.")
   ui:
-    chapter_name: ""
+    chapter_name: " "
+    
+    
+    
+    
